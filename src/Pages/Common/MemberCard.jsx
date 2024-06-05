@@ -6,22 +6,37 @@ import {
     Typography,
     Tooltip,
 } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
-const MemberCard = () => {
+const MemberCard = ({ member }) => {
+    const { BiodataId, Name, BiodataType, ProfileImage, PermanentDivisionName, Age, Occupation, Religion } = member;
     return (
-        <Card className="w-96">
+        <Card>
             <CardHeader floated={false} className="h-80">
-                <img src="https://docs.material-tailwind.com/img/team-3.jpg" alt="profile-picture" />
+                <img src={ProfileImage} alt="profile-picture" className="w-full" />
             </CardHeader>
             <CardBody className="text-center">
                 <Typography variant="h4" color="blue-gray" className="mb-2">
-                    Natalie Paisley
+                    {Name}
                 </Typography>
                 <Typography color="blue-gray" className="font-medium" textGradient>
-                    CEO / Co-Founder
+                    <span className="font-bold">Age : </span> {Age}
                 </Typography>
+                <Typography color="blue-gray" className="font-medium" textGradient>
+                    <span className="font-bold">Gender : </span> {BiodataType}
+                </Typography>
+                <Typography color="blue-gray" className="font-medium" textGradient>
+                    <span className="font-bold">Occupation: </span> {Occupation}
+                </Typography>
+                <Typography color="blue-gray" className="font-medium" textGradient>
+                    <span className="font-bold">Division : </span> {PermanentDivisionName}
+                </Typography>
+                <Typography color="blue-gray" className="font-medium" textGradient>
+                    <span className="font-bold">Religion : </span> {Religion}
+                </Typography>
+                <Link to={`/member/${BiodataId}`}><button className="btn btn-outline btn-secondary">View Details</button></Link>
             </CardBody>
-            <CardFooter className="flex justify-center gap-7 pt-2">
+            {/* <CardFooter className="flex justify-center gap-7 pt-2">
                 <Tooltip content="Like">
                     <Typography
                         as="a"
@@ -55,7 +70,7 @@ const MemberCard = () => {
                         <i className="fab fa-instagram" />
                     </Typography>
                 </Tooltip>
-            </CardFooter>
+            </CardFooter> */}
         </Card>
     );
 };
