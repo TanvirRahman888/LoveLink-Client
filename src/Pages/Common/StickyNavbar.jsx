@@ -3,7 +3,6 @@ import {
     Navbar,
     MobileNav,
     Typography,
-    Button,
     IconButton,
 } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
@@ -19,7 +18,7 @@ export default function StickyNavbar() {
     }, []);
 
     const navList = (
-        <ul className="mt-2 mb-4 flex flex-col gap-2 pt-2 lg:mt-2 lg:flex-row lg:items-center lg:gap-6">
+        <ul className="mt-2 flex flex-col gap-2 pt-2 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
             <Typography
                 as="li"
                 variant="small"
@@ -53,12 +52,20 @@ export default function StickyNavbar() {
             >
                 <NavLink to={'/contactus'} className="p-2 border-2 text-2xl border-red-300 rounded-md hover:bg-red-200">Contact Us</NavLink>
             </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-normal"
+            >
+                <NavLink to={'/login'} className="p-2 border-2 text-2xl border-red-300 rounded-md hover:bg-red-200">Log In</NavLink>
+            </Typography>
         </ul>
     );
 
     return (
         <div className="">
-            <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4">
+            <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 mb-3 lg:px-8 lg:py-4">
                 <div className="flex items-center justify-between text-blue-gray-900">
                     <Typography
                         as="a"
@@ -72,15 +79,7 @@ export default function StickyNavbar() {
                     </Typography>
                     <div className="flex items-center gap-4">
                         <div className="mr-4 hidden lg:block">{navList}</div>
-                        <div className="flex items-center gap-x-1">
-                            <Button
-                                variant="text"
-                                size="sm"
-                                className="hidden lg:inline-block"
-                            >
-                                <p>Log In</p>
-                            </Button>
-                        </div>
+                        
                         <IconButton
                             variant="text"
                             className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -122,11 +121,7 @@ export default function StickyNavbar() {
                 </div>
                 <MobileNav open={openNav} className="px-2">
                     {navList}
-                    <div className="">
-                        <Button fullWidth variant="text" size="sm" className="">
-                            <span>Log In</span>
-                        </Button>
-                    </div>
+                    
                 </MobileNav>
             </Navbar>
         </div>

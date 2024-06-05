@@ -1,0 +1,82 @@
+[
+    {
+        "Biodata Id": 1,
+        "Biodata Type": "Male",
+        "Profile Image": "https://randomuser.me/api/portraits/men/1.jpg",
+        "Permanent Division name": "Dhaka",
+        "Age": 23,
+        "Occupation": "Student"
+    },
+    {
+        "Biodata Id": 2,
+        "Biodata Type": "Female",
+        "Profile Image": "https://randomuser.me/api/portraits/women/2.jpg",
+        "Permanent Division name": "Chattagram",
+        "Age": 45,
+        "Occupation": "House wife"
+    },
+    {
+        "Biodata Id": 3,
+        "Biodata Type": "Male",
+        "Profile Image": "https://randomuser.me/api/portraits/men/3.jpg",
+        "Permanent Division name": "Rangpur",
+        "Age": 30,
+        "Occupation": "Job"
+    },
+    {
+        "Biodata Id": 4,
+        "Biodata Type": "Female",
+        "Profile Image": "https://randomuser.me/api/portraits/women/4.jpg",
+        "Permanent Division name": "Barisal",
+        "Age": 23,
+        "Occupation": "Student"
+    },
+    {
+        "Biodata Id": 5,
+        "Biodata Type": "Male",
+        "Profile Image": "https://randomuser.me/api/portraits/men/5.jpg",
+        "Permanent Division name": "Khulna",
+        "Age": 45,
+        "Occupation": "Job"
+    },
+    {
+        "Biodata Id": 6,
+        "Biodata Type": "Female",
+        "Profile Image": "https://randomuser.me/api/portraits/women/6.jpg",
+        "Permanent Division name": "Maymansign",
+        "Age": 30,
+        "Occupation": "House wife"
+    },
+    {
+        "Biodata Id": 7,
+        "Biodata Type": "Male",
+        "Profile Image": "https://randomuser.me/api/portraits/men/7.jpg",
+        "Permanent Division name": "Sylhet",
+        "Age": 23,
+        "Occupation": "Student"
+    },
+    {
+        "Biodata Id": 8,
+        "Biodata Type": "Female",
+        "Profile Image": "https://randomuser.me/api/portraits/women/8.jpg",
+        "Permanent Division name": "Dhaka",
+        "Age": 45,
+        "Occupation": "House wife"
+    },
+    {
+        "Biodata Id": 9,
+        "Biodata Type": "Male",
+        "Profile Image": "https://randomuser.me/api/portraits/men/9.jpg",
+        "Permanent Division name": "Chattagram",
+        "Age": 30,
+        "Occupation": "Job"
+    },
+    {
+        "Biodata Id": 10,
+        "Biodata Type": "Female",
+        "Profile Image": "https://randomuser.me/api/portraits/women/10.jpg",
+        "Permanent Division name": "Rangpur",
+        "Age": 23,
+        "Occupation": "Student"
+    }
+]
