@@ -1,6 +1,6 @@
-.active {
-background: #ef9a9a;
-}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.active {
+color: #000;
+}

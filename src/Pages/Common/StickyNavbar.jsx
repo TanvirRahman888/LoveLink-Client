@@ -26,7 +26,7 @@ export default function StickyNavbar() {
                 className="p-1 font-normal"
             >
 
-                <NavLink to={'/'} className="p-2 border-2 text-2xl border-red-300 rounded-md hover:bg-red-200">Home</NavLink>
+                <NavLink to={'/'} className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 font-medium rounded-lg ">Home</NavLink>
             </Typography>
             <Typography
                 as="li"
@@ -34,7 +34,7 @@ export default function StickyNavbar() {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <NavLink to={'/biodata'} className="p-2 border-2 text-2xl border-red-300 rounded-md hover:bg-red-200">Biodata</NavLink>
+                <NavLink to={'/biodata'} className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 font-medium rounded-lg ">Biodata</NavLink>
             </Typography>
             <Typography
                 as="li"
@@ -42,7 +42,7 @@ export default function StickyNavbar() {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <NavLink to={'/aboutus'} className="p-2 border-2 text-2xl border-red-300 rounded-md hover:bg-red-200">About Us</NavLink>
+                <NavLink to={'/aboutus'} className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 font-medium rounded-lg ">About Us</NavLink>
             </Typography>
             <Typography
                 as="li"
@@ -50,7 +50,7 @@ export default function StickyNavbar() {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <NavLink to={'/contactus'} className="p-2 border-2 text-2xl border-red-300 rounded-md hover:bg-red-200">Contact Us</NavLink>
+                <NavLink to={'/contactus'} className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 font-medium rounded-lg ">Contact Us</NavLink>
             </Typography>
             <Typography
                 as="li"
@@ -58,7 +58,7 @@ export default function StickyNavbar() {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <NavLink to={'/login'} className="p-2 border-2 text-2xl border-red-300 rounded-md hover:bg-red-200">Log In</NavLink>
+                <NavLink to={'/login'} className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 font-medium rounded-lg ">Log In</NavLink>
             </Typography>
         </ul>
     );
@@ -79,7 +79,7 @@ export default function StickyNavbar() {
                     </Typography>
                     <div className="flex items-center gap-4">
                         <div className="mr-4 hidden lg:block">{navList}</div>
-                        
+
                         <IconButton
                             variant="text"
                             className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -121,7 +121,7 @@ export default function StickyNavbar() {
                 </div>
                 <MobileNav open={openNav} className="px-2">
                     {navList}
-                    
+
                 </MobileNav>
             </Navbar>
         </div>

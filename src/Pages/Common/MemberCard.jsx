@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
     Card,
     CardHeader,
@@ -36,7 +37,7 @@ const MemberCard = ({ member }) => {
                 </Typography>
                 <Link to={`/member/${BiodataId}`}><button className="btn btn-outline btn-secondary">View Details</button></Link>
             </CardBody>
-            {/* <CardFooter className="flex justify-center gap-7 pt-2">
+            <CardFooter className="flex justify-center gap-7 pt-2">
                 <Tooltip content="Like">
                     <Typography
                         as="a"
@@ -70,9 +71,13 @@ const MemberCard = ({ member }) => {
                         <i className="fab fa-instagram" />
                     </Typography>
                 </Tooltip>
-            </CardFooter> */}
+            </CardFooter>
         </Card>
     );
 };
 
 export default MemberCard;
+MemberCard.propTypes = {
+    member: PropTypes.object,
+
+}

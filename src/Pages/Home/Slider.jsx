@@ -29,8 +29,8 @@ const Slider = () => {
                 </div>
             </Carousel>
             <div className="absolute bottom-24 flex justify-between px-20 w-full ">
-                <Link><button className="btn btn-outline border-red-300 border-2 text-white text-xl hover:bg-red-100 hover:text-red-500">Gallary</button> </Link>
-                <Link><button className="btn btn-outline border-red-300 border-2 text-white text-xl hover:bg-red-100 hover:text-red-500">Join Here</button> </Link>
+                <Link><button className="btn btn-outline rounded-lg hover:bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800">Gallary</button> </Link>
+                <Link><button className="btn btn-outline rounded-lg hover:bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800">Join Here</button> </Link>
             </div>
         </div>
     );
