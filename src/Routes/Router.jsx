@@ -3,6 +3,8 @@ import Home from "../Pages/Home/Home";
 import Root from "../Pages/Root/Root";
 import Login from "../Pages/LogIn/Login";
 import Register from "../Pages/LogIn/Register";
+import PrivateRoute from "./PrivateRoute";
+import Private from "../Pages/Private/Private";
 
 export const router = createBrowserRouter([
     {
@@ -20,6 +22,10 @@ export const router = createBrowserRouter([
         {
             path:'/register',
             element:<Register></Register>
+        },
+        {
+            path:'/private',
+            element:<PrivateRoute><Private></Private></PrivateRoute>
         },
       ]
     },

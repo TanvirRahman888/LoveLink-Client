@@ -1,12 +1,14 @@
 import { useContext, useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
 
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const {logIn}=useContext(AuthContext)
+    const location = useLocation()
 
     const handelLogin = e => {
         e.preventDefault();
@@ -18,22 +20,26 @@ const Login = () => {
         .then(result=>{
             const user=result.user;
             console.log(user);
+            toast.success('Login Successful')
         })
+        .catch((error) => {
+            toast.error(error.message)
+          });
         form.reset()
     }
     return (
 
         <div className="flex items-center justify-center min-h-screen bg-[url('https://www.wedgatematrimony.com/wp-content/uploads/2020/02/matrimonial-site.jpg')] bg-cover" >
             <div className="p-4 w-2/3 md:w-1/2 bg-white bg-opacity-90 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-                <form onSubmit={handelLogin} className="space-y-6" action="#">
+                <form onSubmit={handelLogin} className="space-y-6">
                     <h5 className="text-2xl font-bold text-center text-gray-900 dark:text-white">Sign in to our platform</h5>
                     <div>
                         <label name="email" className="block mb-2 font-bold text-gray-900 dark:text-white">Your Email</label>
-                        <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
+                        <input type="email" name="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
                     </div>
                     <div className="relative">
                         <label name="password" className="block mb-2 font-bold text-gray-900 dark:text-white">Your Password</label>
-                        <input type={showPassword ? "text" : "password"} name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                        <input type={showPassword ? "text" : "password"} name="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
                         <div onClick={() => setShowPassword(!showPassword)} className="absolute right-6 top-11">
                             {
                                 showPassword ? <FaRegEyeSlash /> : <FaRegEye />

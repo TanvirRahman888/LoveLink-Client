@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import StickyNavbar from "../Common/StickyNavbar";
 import { SimpleFooter } from "../Common/Footer";
+import { Toaster } from "react-hot-toast";
 
 
 const Root = () => {
@@ -13,7 +14,7 @@ const Root = () => {
             <Outlet></Outlet>
             {noHeaderFooter || <SimpleFooter></SimpleFooter>}
             
-            
+            <Toaster />
         </div>
     );
 };

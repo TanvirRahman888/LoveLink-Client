@@ -1,0 +1,83 @@
+[
+    {
+      "_id": "1",
+      "image": "https://randomuser.me/api/portraits/men/32.jpg",
+      "userName": "JohnDoe",
+      "marriageDate": "2022-05-14",
+      "reviewStar": 5,
+      "successStoryText": "We met through LoveLink and it was love at first sight. Our wedding was a dream come true."
+    },
+    {
+      "_id": "2",
+      "image": "https://randomuser.me/api/portraits/women/45.jpg",
+      "userName": "JaneSmith",
+      "marriageDate": "2021-11-20",
+      "reviewStar": 4,
+      "successStoryText": "Thanks to LoveLink, we found each other and are now happily married."
+    },
+    {
+      "_id": "3",
+      "image": "https://randomuser.me/api/portraits/men/50.jpg",
+      "userName": "MikeJohnson",
+      "marriageDate": "2023-02-14",
+      "reviewStar": 5,
+      "successStoryText": "LoveLink helped me find my soulmate. Our wedding was perfect."
+    },
+    {
+      "_id": "4",
+      "image": "https://randomuser.me/api/portraits/women/34.jpg",
+      "userName": "EmilyBrown",
+      "marriageDate": "2022-07-07",
+      "reviewStar": 4,
+      "successStoryText": "I never thought I'd find love online, but LoveLink proved me wrong. We're so happy together."
+    },
+    {
+      "_id": "5",
+      "image": "https://randomuser.me/api/portraits/men/22.jpg",
+      "userName": "ChrisDavis",
+      "marriageDate": "2023-03-30",
+      "reviewStar": 5,
+      "successStoryText": "Our journey started on LoveLink, and now we're happily married!"
+    },
+    {
+      "_id": "6",
+      "image": "https://randomuser.me/api/portraits/women/12.jpg",
+      "userName": "AnnaMiller",
+      "marriageDate": "2021-09-12",
+      "reviewStar": 4,
+      "successStoryText": "LoveLink brought us together and our bond has only grown stronger."
+    },
+    {
+      "_id": "7",
+      "image": "https://randomuser.me/api/portraits/men/65.jpg",
+      "userName": "JamesWilson",
+      "marriageDate": "2023-01-01",
+      "reviewStar": 5,
+      "successStoryText": "Finding my partner on LoveLink was the best decision I ever made."
+    },
+    {
+      "_id": "8",
+      "image": "https://randomuser.me/api/portraits/women/17.jpg",
+      "userName": "SophiaMartinez",
+      "marriageDate": "2022-12-25",
+      "reviewStar": 4,
+      "successStoryText": "We connected through LoveLink and it was a perfect match."
+    },
+    {
+      "_id": "9",
+      "image": "https://randomuser.me/api/portraits/men/37.jpg",
+      "userName": "DavidLee",
+      "marriageDate": "2022-06-18",
+      "reviewStar": 5,
+      "successStoryText": "Thanks to LoveLink, we found our forever love. Our wedding day was magical."
+    },
+    {
+      "_id": "10",
+      "image": "https://randomuser.me/api/portraits/women/53.jpg",
+      "userName": "OliviaGarcia",
+      "marriageDate": "2021-10-15",
+      "reviewStar": 4,
+      "successStoryText": "We met on LoveLink and our connection was instant. Now, we're happily married."
+    }
+  ]
+  

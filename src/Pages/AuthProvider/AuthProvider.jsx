@@ -18,11 +18,11 @@ const AuthProvider = ({ children }) => {
             setLoading(false)
         });
         //ToDo 
-        // return () => {
-        //     return unsubscribe();
-        // } // return 1
+        return () => {
+            return unsubscribe();
+        } // return 1
 
-        return unsubscribe(); // return 2
+        // return unsubscribe(); // return 2
     }, [])
 
     const createUser=(email, password)=>{

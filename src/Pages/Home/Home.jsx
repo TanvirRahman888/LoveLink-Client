@@ -1,5 +1,6 @@
 import PremiumMember from "./PremiumMember";
 import Slider from "./Slider";
+import SuccessStory from "./SucessStory";
 
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
         <div className="">
             <Slider></Slider>
             <PremiumMember></PremiumMember>
+            <SuccessStory></SuccessStory>
             
         </div>
     );

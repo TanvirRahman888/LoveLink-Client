@@ -3,21 +3,31 @@ import { useForm } from "react-hook-form";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useContext, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Register = () => {
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
     const password = watch("Password");
 
     const [showPassword, setShowPassword] = useState(false);
-const {createUser} = useContext(AuthContext);
+    const { createUser } = useContext(AuthContext);
 
     const onSubmit = data => {
         console.log(data);
+        // const userCreationPromise = createUser(data.Email, data.Name)
         createUser(data.Email, data.Name)
-        .then( result =>{
-            const loggedUser=result.user;
-            console.log('loggedUser', loggedUser);
-        })
+            .then(result => {
+                const loggedUser = result.user;
+                console.log('loggedUser', loggedUser);
+                toast.success('User created successfully!')
+
+            })
+            .catch(error => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.error("Error creating user: ", errorCode, errorMessage);
+                toast.error("Could not create user.")
+            });
         reset();
     };
 

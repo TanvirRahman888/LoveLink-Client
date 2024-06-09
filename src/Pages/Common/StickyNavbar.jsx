@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
     Navbar,
     MobileNav,
@@ -6,9 +6,20 @@ import {
     IconButton,
 } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
 
 export default function StickyNavbar() {
     const [openNav, setOpenNav] = React.useState(false);
+    const {user, logOut} = useContext(AuthContext);
+
+    const handelLogOut=()=>{
+        logOut()
+        .then(()=>toast.success('Logout Successful'))
+        .catch((error) => {
+            toast.error(error.message)
+          });
+    }
 
     React.useEffect(() => {
         window.addEventListener(
@@ -52,6 +63,17 @@ export default function StickyNavbar() {
             >
                 <NavLink to={'/contactus'} className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 font-medium rounded-lg ">Contact Us</NavLink>
             </Typography>
+            {
+                user ?
+                <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-normal"
+            >
+                <NavLink onClick={handelLogOut} className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 font-medium rounded-lg ">Log Out</NavLink>
+            </Typography>
+            :
             <Typography
                 as="li"
                 variant="small"
@@ -60,6 +82,9 @@ export default function StickyNavbar() {
             >
                 <NavLink to={'/login'} className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 font-medium rounded-lg ">Log In</NavLink>
             </Typography>
+
+            }
+            
         </ul>
     );
 
