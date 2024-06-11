@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 
@@ -8,7 +8,9 @@ import toast from "react-hot-toast";
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const {logIn}=useContext(AuthContext)
-    const location = useLocation()
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || "/";
 
     const handelLogin = e => {
         e.preventDefault();
@@ -20,7 +22,8 @@ const Login = () => {
         .then(result=>{
             const user=result.user;
             console.log(user);
-            toast.success('Login Successful')
+            toast.success('Login Successful');
+            navigate(from, {replace:true});
         })
         .catch((error) => {
             toast.error(error.message)

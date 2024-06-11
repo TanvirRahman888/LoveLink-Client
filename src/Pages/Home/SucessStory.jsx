@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SectionTitle from "../Common/SectionTitle";
 
 // import Swiper core and required modules
-import { Navigation, Autoplay, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Navigation, Autoplay, Pagination,  A11y } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -50,7 +50,7 @@ const SuccessStory = () => {
             {/* ---------- */}
             <Swiper
                 // install Swiper modules
-                modules={[Navigation,Autoplay, Pagination, Scrollbar, A11y]}
+                modules={[Navigation,Autoplay, Pagination, A11y]}
                 spaceBetween={50}
                 slidesPerView={1}
                 autoplay={{
@@ -59,7 +59,6 @@ const SuccessStory = () => {
                   }}
                 navigation
                 pagination={{ clickable: true }}
-                scrollbar={{ draggable: true }}
                 onSwiper={(swiper) => console.log(swiper)}
                 onSlideChange={() => console.log('slide change')}
             >

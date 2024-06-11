@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useContext, useState } from "react";
@@ -9,29 +9,43 @@ const Register = () => {
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
     const password = watch("Password");
 
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || "/";
+
     const [showPassword, setShowPassword] = useState(false);
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
 
     const onSubmit = data => {
         console.log(data);
-        // const userCreationPromise = createUser(data.Email, data.Name)
-        createUser(data.Email, data.Name)
+        createUser(data.Email, data.Password)
             .then(result => {
                 const loggedUser = result.user;
-                console.log('loggedUser', loggedUser);
-                toast.success('User created successfully!')
+                toast.success('User created successfully!');
+                updateUserProfile(data.Name, data.Photo)
+                    .then(() => {
+                        navigate(from, { replace: true });
+                        toast.success('User created successfully!');
+                        console.log('loggedUser', loggedUser);
+                        reset();
+                    })
+                    .catch(error => {
+                        toast.error("Could not update user profile.");
+                        console.error("Error updating user profile: ", error);
+                    });
 
             })
             .catch(error => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.error("Error creating user: ", errorCode, errorMessage);
+                console.log("Error creating user: ", errorCode, errorMessage);
+                console.log("Could not create user.")
                 toast.error("Could not create user.")
             });
-        reset();
+
     };
 
-    console.log(watch("example"));
     return (
         <div className="flex items-center justify-center min-h-screen bg-[url('https://i.ibb.co/0y2RJ5w/Computer-login-amico.png')] bg-cover" >
             <div className="p-4 w-2/3 md:w-1/2 bg-white bg-opacity-90 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
@@ -42,6 +56,21 @@ const Register = () => {
                         <input type="text" {...register("Name", { required: true })} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Your Name" />
                         {errors.Name && <span className="text-red-500">Name is required</span>}
                     </div>
+                    <div>
+                        <label className="block mb-2 font-bold text-gray-900 dark:text-white">Photo URL</label>
+                        <input type="url" {...register("Photo", { required: true })} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Photo URL" />
+                        {errors.Photo && <span className="text-red-500">Photo is required</span>}
+                    </div>
+                    {/* Gender
+                    <div>
+                        <label className="block mb-2 font-bold text-gray-900 dark:text-white">Gender</label>
+                        <select {...register("Gender", { required: true })} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                            <option value="" className="disabled">Select...</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        {errors.Gender && <span className="text-red-500">Gender is required</span>}
+                    </div> */}
                     <div>
                         <label className="block mb-2 font-bold text-gray-900 dark:text-white">Your Email</label>
                         <input type="email" {...register("Email", { required: true })} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" />
