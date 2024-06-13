@@ -69,10 +69,15 @@ export default function StickyNavbar() {
                         as="li"
                         variant="small"
                         color="blue-gray"
-                        className="p-1 font-normal"
+                        className="p-1 font-normal flex gap-2 items-center"
                     >
                         {/* <NavLink onClick={handelLogOut} className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 font-medium rounded-lg ">Log Out</NavLink> */}
 
+                        <NavLink to={'/wishlist'}><button type="button" title="Wish List" className="relative inline-flex items-center p-2 text-sm text-center text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 font-medium rounded-lg">
+                            <img src="https://static.vecteezy.com/system/resources/previews/020/038/368/non_2x/pink-color-heart-icon-isolated-transparent-background-free-png.png" className="w-5 h-5"  alt="" />
+                            <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">{20}</div>
+                        </button></NavLink>
+                        
                         <div className="dropdown lg:dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
@@ -86,6 +91,7 @@ export default function StickyNavbar() {
                                 <li className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 rounded-lg"><Link onClick={handelLogOut}> <a className="">Log Out</a> </Link></li>
                             </ul>
                         </div>
+                        
                     </Typography>
 
                     :

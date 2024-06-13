@@ -12,8 +12,8 @@ import { Link } from "react-router-dom";
 const MemberCard = ({ member }) => {
     const { _id, BioId, Name, Gender, ProfileImage, PermanentDivisionName, Age, Occupation, Religion } = member;
     return (
-        <Card>
-            <CardHeader floated={false} className="h-80">
+        <Card className='m-3 bg-gradient-to-r from-pink-200 via-pink-300 to-pink-400 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800'>
+            <CardHeader floated={false} className="h-auto">
                 <img src={ProfileImage} alt="profile-picture" className="w-full" />
             </CardHeader>
             <CardBody className="text-center">
@@ -35,7 +35,7 @@ const MemberCard = ({ member }) => {
                 <Typography color="blue-gray" className="font-medium" textGradient>
                     <span className="font-bold">Religion : </span> {Religion}
                 </Typography>
-                <Link to={`/member/${_id}`}><button className="btn btn-outline btn-secondary">View Details</button></Link>
+                <Link to={`/biodata/${_id}`}><button className="btn btn-outline btn-secondary">View Details</button></Link>
             </CardBody>
             <CardFooter className="flex justify-center gap-7 pt-2">
                 <Tooltip content="Like">

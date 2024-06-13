@@ -4,6 +4,8 @@ import 'react-tabs/style/react-tabs.css';
 import { useForm } from "react-hook-form";
 
 
+
+
 import 'react-accessible-accordion/dist/fancy-example.css';
 import {
     Accordion,
@@ -16,13 +18,14 @@ import { useEffect, useState } from 'react';
 import MemberCard from '../Common/MemberCard';
 
 const Biodata = () => {
+    
     const { register, handleSubmit } = useForm();
 
     const [bioData, setBioData] = useState([]);
     useEffect(() => {
         fetch("http://localhost:5000/biodata")
             .then(res => res.json())
-            .then(data => setBioData(data))
+            .then(data =>setBioData(data))
     }, [])
 
 
@@ -210,7 +213,7 @@ const Biodata = () => {
                     </select>
                 </div>
                 <hr />
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                     {
                         bioData.map(member => <MemberCard key={member.BioID} member={member}></MemberCard>)
                     }

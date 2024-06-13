@@ -16,7 +16,7 @@ const SuccessStory = () => {
     const [feedback, setFeedback] = useState([]);
 
     useEffect(() => {
-        fetch("SucessStory.json")
+        fetch("http://localhost:5000/successstory")
             .then(res => res.json())
             .then(data => setFeedback(data));
     }, []);
