@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 
 const MemberCard = ({ member }) => {
-    const { BiodataId, Name, BiodataType, ProfileImage, PermanentDivisionName, Age, Occupation, Religion } = member;
+    const { _id, BioId, Name, Gender, ProfileImage, PermanentDivisionName, Age, Occupation, Religion } = member;
     return (
         <Card>
             <CardHeader floated={false} className="h-80">
@@ -24,7 +24,7 @@ const MemberCard = ({ member }) => {
                     <span className="font-bold">Age : </span> {Age}
                 </Typography>
                 <Typography color="blue-gray" className="font-medium" textGradient>
-                    <span className="font-bold">Gender : </span> {BiodataType}
+                    <span className="font-bold">Gender : </span> {Gender}
                 </Typography>
                 <Typography color="blue-gray" className="font-medium" textGradient>
                     <span className="font-bold">Occupation: </span> {Occupation}
@@ -35,7 +35,7 @@ const MemberCard = ({ member }) => {
                 <Typography color="blue-gray" className="font-medium" textGradient>
                     <span className="font-bold">Religion : </span> {Religion}
                 </Typography>
-                <Link to={`/member/${BiodataId}`}><button className="btn btn-outline btn-secondary">View Details</button></Link>
+                <Link to={`/member/${_id}`}><button className="btn btn-outline btn-secondary">View Details</button></Link>
             </CardBody>
             <CardFooter className="flex justify-center gap-7 pt-2">
                 <Tooltip content="Like">

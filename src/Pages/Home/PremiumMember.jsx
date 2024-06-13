@@ -16,10 +16,11 @@ const PremiumMember = () => {
             <SectionTitle title="Trusted Profiles" sortDescription="Premium Members"></SectionTitle>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-center p-5 rounded-xl"
             style={{ background: 'linear-gradient(to right, #F2BABA, #E541AE)' }}
+            // "PremiumMember": "Yes",
             >
                 {
-                    premiumMember.filter(member => member.Occupation === "Job" || member.Occupation === "Business").slice(0, 6)
-                        .map(member => <MemberCard key={member.BiodataId} member={member}></MemberCard>)
+                    premiumMember.filter(member => member.PremiumMember === "Yes").slice(0, 6)
+                        .map(member => <MemberCard key={member.BioID} member={member}></MemberCard>)
                 }
             </div>
         </div>

@@ -5,20 +5,20 @@ import {
     Typography,
     IconButton,
 } from "@material-tailwind/react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 
 export default function StickyNavbar() {
     const [openNav, setOpenNav] = React.useState(false);
-    const {user, logOut} = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
 
-    const handelLogOut=()=>{
+    const handelLogOut = () => {
         logOut()
-        .then(()=>toast.success('Logout Successful'))
-        .catch((error) => {
-            toast.error(error.message)
-          });
+            .then(() => toast.success('Logout Successful'))
+            .catch((error) => {
+                toast.error(error.message)
+            });
     }
 
     React.useEffect(() => {
@@ -65,26 +65,41 @@ export default function StickyNavbar() {
             </Typography>
             {
                 user ?
-                <Typography
-                as="li"
-                variant="small"
-                color="blue-gray"
-                className="p-1 font-normal"
-            >
-                <NavLink onClick={handelLogOut} className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 font-medium rounded-lg ">Log Out</NavLink>
-            </Typography>
-            :
-            <Typography
-                as="li"
-                variant="small"
-                color="blue-gray"
-                className="p-1 font-normal"
-            >
-                <NavLink to={'/login'} className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 font-medium rounded-lg ">Log In</NavLink>
-            </Typography>
+                    <Typography
+                        as="li"
+                        variant="small"
+                        color="blue-gray"
+                        className="p-1 font-normal"
+                    >
+                        {/* <NavLink onClick={handelLogOut} className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 font-medium rounded-lg ">Log Out</NavLink> */}
+
+                        <div className="dropdown lg:dropdown-end">
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    <img alt="Profile Picture" src={user?.photoURL || "https://static.thenounproject.com/png/363639-200.png"} />
+                                </div>
+                            </div>
+                            <ul tabIndex={0} className="menu lg:menu-sm dropdown-content lg:mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-full lg:w-52">
+                                <li className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 rounded-lg"><a>{user?.displayName}</a></li>
+                                <li className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 rounded-lg"><Link to={'/updateprofile'}>Update Profile</Link></li>
+                                <li className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 rounded-lg"><Link to={'/dashboard'}>Dashboard</Link></li>
+                                <li className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 rounded-lg"><Link onClick={handelLogOut}> <a className="">Log Out</a> </Link></li>
+                            </ul>
+                        </div>
+                    </Typography>
+
+                    :
+                    <Typography
+                        as="li"
+                        variant="small"
+                        color="blue-gray"
+                        className="p-1 font-normal"
+                    >
+                        <NavLink to={'/login'} className="p-2 border-2 text-2xl text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 font-medium rounded-lg ">Log In</NavLink>
+                    </Typography>
 
             }
-            
+
         </ul>
     );
 

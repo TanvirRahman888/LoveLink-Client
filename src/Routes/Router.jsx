@@ -5,6 +5,7 @@ import Login from "../Pages/LogIn/Login";
 import Register from "../Pages/LogIn/Register";
 import PrivateRoute from "./PrivateRoute";
 import Private from "../Pages/Private/Private";
+import Biodata from "../Pages/Biodata/Biodata";
 
 export const router = createBrowserRouter([
     {
@@ -14,6 +15,10 @@ export const router = createBrowserRouter([
         {
             path:'/',
             element:<Home></Home>
+        },
+        {
+            path:'/Biodata',
+            element:<Biodata></Biodata>
         },
         {
             path:'/login',

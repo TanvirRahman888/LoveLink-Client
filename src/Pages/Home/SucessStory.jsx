@@ -60,7 +60,6 @@ const SuccessStory = () => {
                 navigation
                 pagination={{ clickable: true }}
                 onSwiper={(swiper) => console.log(swiper)}
-                onSlideChange={() => console.log('slide change')}
             >
                 {feedback.map(storyCard => (
                     <SwiperSlide key={storyCard._id}>
