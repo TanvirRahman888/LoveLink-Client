@@ -7,7 +7,7 @@ const PremiumMember = () => {
 
     const [premiumMember, setPremiumMember] = useState([]);
     useEffect(() => {
-        fetch("data.json")
+        fetch("http://localhost:5000/biodata")
             .then(res => res.json())
             .then(data => setPremiumMember(data))
     }, [])
@@ -20,7 +20,7 @@ const PremiumMember = () => {
             >
                 {
                     premiumMember.filter(member => member.PremiumMember === "Yes").slice(0, 6)
-                        .map(member => <MemberCard key={member.BioID} member={member}></MemberCard>)
+                        .map(member => <MemberCard key={member._id} member={member}></MemberCard>)
                 }
             </div>
         </div>

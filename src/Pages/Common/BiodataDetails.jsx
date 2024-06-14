@@ -1,31 +1,49 @@
 import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
-import axios from "axios";
 import toast from "react-hot-toast";
+// import { axiosSecure } from "../../Hooks/useAxiosSecure";
+import Swal from 'sweetalert2'
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useWishList from "../../Hooks/useWishList";
 
 
 
 const BiodataDetails = () => {
     const loadedBiodata = useLoaderData();
     const {user} = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
+    const [,refetch]=useWishList();
 
-    const { Age, BioID, Gender, MaritalStatus, Name, Occupation, PermanentDivisionName, PremiumMember, ProfileImage, Religion, _id } = loadedBiodata;
+    
+    const { Age, BioID, Gender, Name, Occupation, PermanentDivisionName, PremiumMember, ProfileImage, Religion, _id } = loadedBiodata;
 
-
-    const handelAddToWishList=(bioData)=>{
-        console.log(user, user?.email, bioData);
+    const handelAddToWishList=()=>{
+        console.log(user, user?.email);
         const wishList = {
             bioDataId:_id,
             email:user.email
         }
-        axios.post('http://localhost:5000/wishlist',wishList)
-        .then(res=>{
-            console.log(res.data);
-            if (res.data.insertedId) {
-                toast.success(`${Name} added in your Wish List`)
+        Swal.fire({
+            title: "Are you sure to add Wish List?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Confirm!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.post('/wishlist',wishList)
+                .then(res=>{
+                    console.log(res.data);
+                    if (res.data.insertedId) {
+                        toast.success(`${Name} added in your Wish List`)
+                    }
+                })
+                refetch()
             }
-        })
+          });
+        
     }
     return (
         <div className="">

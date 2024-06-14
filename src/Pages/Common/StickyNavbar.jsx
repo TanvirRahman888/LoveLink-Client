@@ -8,10 +8,12 @@ import {
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
+import useWishList from "../../Hooks/useWishList";
 
 export default function StickyNavbar() {
     const [openNav, setOpenNav] = React.useState(false);
     const { user, logOut } = useContext(AuthContext);
+    const [wishlist]=useWishList()
 
     const handelLogOut = () => {
         logOut()
@@ -75,7 +77,7 @@ export default function StickyNavbar() {
 
                         <NavLink to={'/wishlist'}><button type="button" title="Wish List" className="relative inline-flex items-center p-2 text-sm text-center text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800 font-medium rounded-lg">
                             <img src="https://static.vecteezy.com/system/resources/previews/020/038/368/non_2x/pink-color-heart-icon-isolated-transparent-background-free-png.png" className="w-5 h-5"  alt="" />
-                            <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">{20}</div>
+                            <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">{wishlist.length}</div>
                         </button></NavLink>
                         
                         <div className="dropdown lg:dropdown-end">
