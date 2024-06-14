@@ -7,6 +7,8 @@ import PrivateRoute from "./PrivateRoute";
 import Private from "../Pages/Private/Private";
 import Biodata from "../Pages/Biodata/Biodata";
 import BiodataDetails from "../Pages/Common/BiodataDetails";
+import Dashboard from "../Dashboard/Dashboard";
+import WishList from "../Dashboard/WishList";
 
 export const router = createBrowserRouter([
     {
@@ -40,4 +42,14 @@ export const router = createBrowserRouter([
         },
       ]
     },
+    {
+        path:'/dashboard',
+        element:<Dashboard></Dashboard>,
+        children:[
+            {
+                path:'/dashboard',
+                element:<WishList></WishList>
+            },
+        ]
+    }
   ]);
