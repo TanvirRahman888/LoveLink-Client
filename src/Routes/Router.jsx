@@ -9,6 +9,8 @@ import Biodata from "../Pages/Biodata/Biodata";
 import BiodataDetails from "../Pages/Common/BiodataDetails";
 import Dashboard from "../Dashboard/Dashboard";
 import WishList from "../Dashboard/WishList";
+import MyProfile from "../Dashboard/MyProfile";
+import EditProfile from "../Dashboard/EditProfile";
 
 export const router = createBrowserRouter([
     {
@@ -49,6 +51,14 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard',
                 element:<WishList></WishList>
+            },
+            {
+                path:'/dashboard/myprofile',
+                element:<MyProfile></MyProfile>
+            },
+            {
+                path:'/dashboard/editprofile',
+                element:<EditProfile></EditProfile>
             },
         ]
     }
