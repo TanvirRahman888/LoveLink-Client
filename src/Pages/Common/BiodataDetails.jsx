@@ -13,7 +13,8 @@ const BiodataDetails = () => {
     const loadedBiodata = useLoaderData();
     const {user} = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
-    const [,refetch]=useWishList();
+    const [wishListData,refetch]=useWishList();
+    // const [wishListData]=useWishList();
 
     
     const { Age, BioID, Gender, Name, Occupation, PermanentDivisionName, PremiumMember, ProfileImage, Religion, _id } = loadedBiodata;
@@ -22,7 +23,11 @@ const BiodataDetails = () => {
         console.log(user, user?.email);
         const wishList = {
             bioDataId:_id,
-            email:user.email
+            DataId:BioID,
+            email:user.email,
+            name:Name, 
+            PermanentAddress:PermanentDivisionName,
+            Occupation:Occupation
         }
         Swal.fire({
             title: "Are you sure to add Wish List?",
@@ -33,6 +38,9 @@ const BiodataDetails = () => {
             confirmButtonText: "Yes, Confirm!"
           }).then((result) => {
             if (result.isConfirmed) {
+                if (wishListData.find(bio=>bio.bioDataId==_id)) {
+                    return toast.error(`${Name} already added in your Wish List`)
+                }
                 axiosSecure.post('/wishlist',wishList)
                 .then(res=>{
                     console.log(res.data);
