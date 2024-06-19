@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { useForm } from 'react-hook-form';
@@ -8,14 +7,13 @@ import MemberCard from '../Common/MemberCard';
 const Biodata = () => {
   const { register, watch } = useForm();
   const [bioData, setBioData] = useState([]);
-  const [filter, setFilter] = useState(false); // To track if filters are applied
+  const [filter, setFilter] = useState(false);
+  const [sortOrder, setSortOrder] = useState('');
 
-  // Fetch all biodata initially
   useEffect(() => {
     fetchBioData({});
   }, []);
 
-  // Apply filters when form fields change
   useEffect(() => {
     if (filter) {
       const filterBioData = {
@@ -24,17 +22,23 @@ const Biodata = () => {
         Religion: watch("Religion"),
         minAge: watch("minAge"),
         maxAge: watch("maxAge"),
-        PermanentDivisionName: watch("Division")
+        PermanentDivisionName: watch("Division"),
+        sort: sortOrder
       };
       fetchBioData(filterBioData);
     }
-  }, [watch(), filter]);
+  }, [watch(), filter, sortOrder]);
 
   const fetchBioData = async (filters) => {
-      const queryParams = new URLSearchParams(filters);
-      const response = await fetch(`http://localhost:5000/biodata?${queryParams}`);
-      const data = await response.json();
-      setBioData(data);
+    const queryParams = new URLSearchParams(filters);
+    const response = await fetch(`http://localhost:5000/biodata?${queryParams}`);
+    const data = await response.json();
+    setBioData(data);
+  };
+
+  const handleSortChange = (e) => {
+    setSortOrder(e.target.value);
+    setFilter(true);
   };
 
   return (
@@ -47,8 +51,8 @@ const Biodata = () => {
         <div>
           <Tabs>
             <TabList className={'flex justify-around font-bold text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:outline-none dark:focus:ring-pink-800 rounded-lg mx-2'}>
-              <Tab className={'w-full border-2 px-2 py-1'} onClick={() => setFilter(true)}><NavLink to="#">Basic Filter</NavLink></Tab>
-              <Tab className={'w-full border-2 px-2 py-1'} onClick={() => setFilter(true)}><NavLink to="#">Advance Filter</NavLink></Tab>
+              <Tab className={'w-full border-2 px-2 py-1'} onClick={() => setFilter(true)}><p>Basic Filter</p></Tab>
+              <Tab className={'w-full border-2 px-2 py-1'} onClick={() => setFilter(true)}><p>Advance Filter</p></Tab>
             </TabList>
 
             <TabPanel className='m-3'>
@@ -146,11 +150,18 @@ const Biodata = () => {
       </div>
       {/* Biodatas */}
       <div className='md:w-3/4 border rounded-xl'>
-      <div className='w-full'>
-
-      <p className='text-2xl text-center font-bold md:w-1/3'>Total {bioData.length} Biodata</p>
-      </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+        <div className='w-full flex items-center justify-between'>
+          <p className='text-2xl text-center font-bold md:w-1/3'>Total {bioData.length} Biodata</p>
+          <div className="flex items-center font-bold gap-3">
+            <label className="block text-sm font-medium text-gray-700 text-nowrap">Sort By Age</label>
+            <select value={sortOrder} onChange={handleSortChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+              <option value="">Select...</option>
+              <option value="HighToLow">High to Low</option>
+              <option value="LowToHigh">Low To High</option>
+            </select>
+          </div>
+        </div>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
           {bioData.length > 0 ? (
             bioData.map(member => <MemberCard key={member.BioID} member={member}></MemberCard>)
           ) : (
@@ -163,7 +174,3 @@ const Biodata = () => {
 };
 
 export default Biodata;
-
-
-
-                         
