@@ -1,34 +1,41 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
-// import { axiosSecure } from "../../Hooks/useAxiosSecure";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useWishList from "../../Hooks/useWishList";
-
-
+import MemberCard from "../Common/MemberCard";
 
 const BiodataDetails = () => {
     const loadedBiodata = useLoaderData();
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
-    const [wishListData,refetch]=useWishList();
-    // const [wishListData]=useWishList();
-
+    const [wishListData, refetch] = useWishList();
+    const [similarBiodata, setSimilarBiodata] = useState([]);
     
     const { Age, BioID, Gender, Name, Occupation, PermanentDivisionName, PremiumMember, ProfileImage, Religion, _id } = loadedBiodata;
 
-    const handelAddToWishList=()=>{
-        console.log(user, user?.email);
+    useEffect(() => {
+        const similarBiodata = async () => {        
+                const res = await axiosSecure.get(`/biodata/similar/${_id}`);
+                setSimilarBiodata(res.data);
+            
+        };
+
+        similarBiodata();
+    }, [_id]);
+
+    const handleAddToWishList = () => {
         const wishList = {
-            bioDataId:_id,
-            DataId:BioID,
-            email:user.email,
-            name:Name, 
-            PermanentAddress:PermanentDivisionName,
-            Occupation:Occupation
-        }
+            bioDataId: _id,
+            DataId: BioID,
+            email: user.email,
+            name: Name,
+            PermanentAddress: PermanentDivisionName,
+            Occupation: Occupation
+        };
+
         Swal.fire({
             title: "Are you sure to add Wish List?",
             icon: "warning",
@@ -36,23 +43,26 @@ const BiodataDetails = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, Confirm!"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-                if (wishListData.find(bio=>bio.bioDataId==_id)) {
-                    return toast.error(`${Name} already added in your Wish List`)
+                if (wishListData.find(bio => bio.bioDataId === _id)) {
+                    return toast.error(`${Name} already added in your Wish List`);
                 }
-                axiosSecure.post('/wishlist',wishList)
-                .then(res=>{
-                    console.log(res.data);
-                    if (res.data.insertedId) {
-                        toast.success(`${Name} added in your Wish List`)
-                    }
-                })
-                refetch()
+                axiosSecure.post('/wishlist', wishList)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            toast.success(`${Name} added in your Wish List`);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error adding to wishlist:", error);
+                        toast.error("Failed to add to wishlist");
+                    });
+                refetch();
             }
-          });
-        
-    }
+        });
+    };
+
     return (
         <div className="">
             <p className="font-bold">Name : {Name} </p><br />
@@ -63,8 +73,18 @@ const BiodataDetails = () => {
             <p className="font-bold">Permanent Division Name : {PermanentDivisionName} </p><br />
             <p className="font-bold">PremiumMember : {PremiumMember} </p><br />
             <img src={ProfileImage} alt="" />
-            {console.log(loadedBiodata)}
-            <button onClick={handelAddToWishList} className="btn">Add to wish list</button>
+            <button onClick={handleAddToWishList} className="btn">Add to wish list</button>
+
+            <h3 className="mt-5 text-xl font-bold">Similar Biodata</h3>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+                {similarBiodata.length > 0 ? (
+                    similarBiodata.map(member => (
+                        <MemberCard key={member.BioID} member={member}></MemberCard>
+                    ))
+                ) : (
+                    <p className="text-center text-gray-500">Finding the most similar Biodata...</p>
+                )}
+            </div>
         </div>
     );
 };
