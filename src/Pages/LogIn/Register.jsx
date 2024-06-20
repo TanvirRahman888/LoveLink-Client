@@ -4,8 +4,12 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useContext, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Register = () => {
+
+    const axiosPublic = useAxiosPublic();
+
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
     const password = watch("Password");
 
@@ -24,15 +28,24 @@ const Register = () => {
                 toast.success('User created successfully!');
                 updateUserProfile(data.Name, data.Photo)
                     .then(() => {
-                        navigate(from, { replace: true });
-                        toast.success('User created successfully!');
-                        console.log('loggedUser', loggedUser);
-                        reset();
+                        const userInfo = {
+                            name: data.Name,
+                            email: data.Email
+
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                console.log("USer created in database. ",res.data);
+                                if (res.data.insertedId) {
+                                    navigate(from, { replace: true });
+                                    toast.success('User created successfully!');
+                                    console.log('loggedUser', loggedUser);
+                                    reset();
+                                }
+                            })
+
                     })
-                    .catch(error => {
-                        toast.error("Could not update user profile.");
-                        console.error("Error updating user profile: ", error);
-                    });
+
 
             })
             .catch(error => {
