@@ -1,27 +1,41 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Pages/AuthProvider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const EditProfile = () => {
     const { user } = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const navigate = useNavigate();
-    const axiosSecure=useAxiosSecure();
+    const axiosSecure = useAxiosSecure();
+
+    useEffect(() => {
+        const fetchBiodata = async () => {
+            const response = await axiosSecure.get(`/myprofile/${user.email}`);
+            reset(response.data);
+        };
+
+        fetchBiodata();
+    }, [user.email, axiosSecure, reset]);
 
     const onSubmit = async (data) => {
         console.log(data);
-        try {
-            const response = await axiosSecure.patch(`/biodata/${user.email}`, data);
-            console.log("Profile updated:", response.data);
-            if (response.data.modifiedCount > 0) {
-                // navigate("/profile"); // Navigate to profile page after update
-                toast.success("Profile Updated")
-            }
-        } catch (error) {
-            console.error("Error updating profile:", error);
+        const response = await axiosSecure.patch(`/biodata/${user.email}`, data);
+        console.log("Response data:", response.data);
+
+        if (response.data.modifiedCount > 0) {
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Profile Updated",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              
+            navigate("/dashboard/myprofile");
         }
     };
 
