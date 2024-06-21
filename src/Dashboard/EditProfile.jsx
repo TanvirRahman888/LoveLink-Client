@@ -1,12 +1,29 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Pages/AuthProvider/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const EditProfile = () => {
-    const {user}=useContext(AuthContext)
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+    const { user } = useContext(AuthContext);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const navigate = useNavigate();
+    const axiosSecure=useAxiosSecure();
 
+    const onSubmit = async (data) => {
+        console.log(data);
+        try {
+            const response = await axiosSecure.patch(`/biodata/${user.email}`, data);
+            console.log("Profile updated:", response.data);
+            if (response.data.modifiedCount > 0) {
+                // navigate("/profile"); // Navigate to profile page after update
+                toast.success("Profile Updated")
+            }
+        } catch (error) {
+            console.error("Error updating profile:", error);
+        }
+    };
 
     return (
         <div>
@@ -14,28 +31,28 @@ const EditProfile = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
                     <label className="block mb-1">Gender</label>
-                    <select {...register("gender")}  required>
+                    <select {...register("Gender")} required>
                         <option value="">Select Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
-                        <option value="other">Other</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
                 <div>
                     <label className="block mb-1">Name</label>
-                    <input type="text" defaultValue={user.displayName} {...register("name")} disabled />
+                    <input type="text" defaultValue={user.displayName} {...register("Name")} disabled />
                 </div>
                 <div>
                     <label className="block mb-1">Profile Image Link</label>
-                    <input type="text" {...register("profileImage")}  />
+                    <input type="text" {...register("ProfileImage")} />
                 </div>
                 <div>
                     <label className="block mb-1">Date of Birth</label>
-                    <input type="date" {...register("DateOfBirth")}   required />
+                    <input type="date" {...register("DateOfBirth")} required />
                 </div>
                 <div>
                     <label className="block mb-1">Height</label>
-                    <select {...register("Height")}   required>
+                    <select {...register("Height")} required>
                         <option value="">Select Height</option>
                         <option value="4.10">4.10</option>
                         <option value="5.0">5.0</option>
@@ -55,7 +72,7 @@ const EditProfile = () => {
                 </div>
                 <div>
                     <label className="block mb-1">Weight</label>
-                    <select {...register("Weight")}   required>
+                    <select {...register("Weight")} required>
                         <option value="">Select Weight</option>
                         <option value="50-">50-</option>
                         <option value="50-55">50-55</option>
@@ -70,11 +87,11 @@ const EditProfile = () => {
                 </div>
                 <div>
                     <label className="block mb-1">Age</label>
-                    <input type="number" {...register("Age")}   required />
+                    <input type="number" {...register("Age")} required />
                 </div>
                 <div>
                     <label className="block mb-1">Occupation</label>
-                    <select {...register("Occupation")}   required>
+                    <select {...register("Occupation")} required>
                         <option value="">Select Occupation</option>
                         <option value="GovtJob">Govt Job</option>
                         <option value="PrivateJob">Private Job</option>
@@ -85,22 +102,22 @@ const EditProfile = () => {
                 </div>
                 <div>
                     <label className="block mb-1">Race</label>
-                    <select {...register("Race")}   required>
+                    <select {...register("Race")} required>
                         <option value="">Select Race</option>
                         <option value="Dhaka">Dhaka</option>
                     </select>
                 </div>
                 <div>
                     <label className="block mb-1">Father Name</label>
-                    <input type="text" {...register("FathersName")}   />
+                    <input type="text" {...register("FathersName")} />
                 </div>
                 <div>
                     <label className="block mb-1">Mother Name</label>
-                    <input type="text" {...register("MothersName")}   />
+                    <input type="text" {...register("MothersName")} />
                 </div>
                 <div>
                     <label className="block mb-1">Permanent Division Name</label>
-                    <select {...register("PermanentDivisionName")}   required>
+                    <select {...register("PermanentDivisionName")} required>
                         <option value="">Select Division</option>
                         <option value="Dhaka">Dhaka</option>
                         <option value="Chattagram">Chattagram</option>
@@ -113,7 +130,7 @@ const EditProfile = () => {
                 </div>
                 <div>
                     <label className="block mb-1">Present Division Name</label>
-                    <select {...register("PresentDivisionName")}   required>
+                    <select {...register("PresentDivisionName")} required>
                         <option value="">Select Division</option>
                         <option value="Dhaka">Dhaka</option>
                         <option value="Chattagram">Chattagram</option>
@@ -126,11 +143,11 @@ const EditProfile = () => {
                 </div>
                 <div>
                     <label className="block mb-1">Expected Partner Age</label>
-                    <input type="number" {...register("ExpectedPartnerAge")}   />
+                    <input type="number" {...register("ExpectedPartnerAge")} />
                 </div>
                 <div>
                     <label className="block mb-1">Expected Partner Height</label>
-                    <select {...register("ExpectedPartnerHeight")}  >
+                    <select {...register("ExpectedPartnerHeight")}>
                         <option value="">Select Height</option>
                         <option value="4.10">4.10</option>
                         <option value="5.0">5.0</option>
@@ -150,7 +167,7 @@ const EditProfile = () => {
                 </div>
                 <div>
                     <label className="block mb-1">Expected Partner Weight</label>
-                    <select {...register("ExpectedPartnerWeight")}  >
+                    <select {...register("ExpectedPartnerWeight")}>
                         <option value="">Select Weight</option>
                         <option value="50-">50-</option>
                         <option value="50-55">50-55</option>
@@ -165,11 +182,11 @@ const EditProfile = () => {
                 </div>
                 <div>
                     <label className="block mb-1">Email</label>
-                    <input type="email" defaultValue={user.email} {...register("Email")}   readOnly />
+                    <input type="email" defaultValue={user.email} {...register("Email")} readOnly />
                 </div>
                 <div>
                     <label className="block mb-1">Mobile Number</label>
-                    <input type="text" {...register("MobileNumber")}   />
+                    <input type="text" {...register("MobileNumber")} />
                 </div>
                 <button type="submit" className="btn btn-primary">
                     Update Profile
@@ -180,3 +197,4 @@ const EditProfile = () => {
 };
 
 export default EditProfile;
+
