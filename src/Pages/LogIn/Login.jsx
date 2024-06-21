@@ -8,11 +8,11 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const {logIn}=useContext(AuthContext)
+    const { logIn } = useContext(AuthContext)
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || "/";
-    const {googleSignIn}=useContext(AuthContext)
+    const { googleSignIn } = useContext(AuthContext)
     const axiosPublic = useAxiosPublic()
 
     const handelGoogleSignIn = () => {
@@ -21,14 +21,22 @@ const Login = () => {
                 console.log(result.user);
                 toast.success("Log in Success with Google");
                 const userInfo = {
-                    name: result.user?.displayName,
-                    email: result.user?.email
+                    Name: result.user?.displayName,
+                    ContactEmail: result.user?.email
                 }
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
                         console.log("User created in database. ", res.data);
                         if (res.data.insertedId) {
                             toast.success('User created successfully!');
+                            axiosPublic.post('/biodata', userInfo)
+                                .then(res => {
+                                    console.log("User created in database. ", res.data);
+                                    if (res.data.insertedId) {
+                                        toast.success('Biodata created successfully!');
+                                    }
+                                    navigate(from, { replace: true });
+                                })
                         }
                         navigate(from, { replace: true });
                     })
@@ -43,18 +51,18 @@ const Login = () => {
         const password = form.password.value;
         console.log(email, password);
         logIn(email, password)
-        .then(result=>{
-            const user=result.user;
-            console.log(user);
-            toast.success('Login Successful');
-            navigate(from, {replace:true});
-        })
-        .catch((error) => {
-            toast.error(error.message)
-          });
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                toast.success('Login Successful');
+                navigate(from, { replace: true });
+            })
+            .catch((error) => {
+                toast.error(error.message)
+            });
         form.reset()
     }
-    
+
     return (
 
         <div className="flex items-center justify-center min-h-screen bg-[url('https://www.wedgatematrimony.com/wp-content/uploads/2020/02/matrimonial-site.jpg')] bg-cover" >
@@ -93,5 +101,4 @@ const Login = () => {
 
     );
 };
-
 export default Login;

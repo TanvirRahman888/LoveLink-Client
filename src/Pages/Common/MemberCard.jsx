@@ -10,8 +10,8 @@ import {
 import { Link } from "react-router-dom";
 
 const MemberCard = ({ member }) => {
-    const { _id, BioId, Name, Gender, ProfileImage, PermanentDivisionName, Age, Occupation, Religion } = member;
-    console.log(_id);
+    const { _id, Name, Gender, ProfileImage, PermanentDivisionName, Age, Occupation, Religion } = member;
+    // console.log(_id);
     return (
         <Card className='m-3 bg-gradient-to-r from-pink-200 via-pink-300 to-pink-400 hover:bg-gradient-to-br  focus:outline-none  dark:focus:ring-pink-800'>
             <CardHeader floated={false} className="h-auto">

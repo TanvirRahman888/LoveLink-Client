@@ -19,7 +19,7 @@ const PremiumMember = () => {
             // "PremiumMember": "Yes",
             >
                 {
-                    premiumMember.filter(member => member.PremiumMember === "Yes").slice(0, 6)
+                    premiumMember.filter(member => member.PremiumMember === "true").slice(0, 6)
                         .map(member => <MemberCard key={member._id} member={member}></MemberCard>)
                 }
             </div>

@@ -16,14 +16,22 @@ const Register = () => {
                 console.log(result.user);
                 toast.success("Log in Success with Google");
                 const userInfo = {
-                    name: result.user?.displayName,
-                    email: result.user?.email
+                    Name: result.user?.displayName,
+                    ContactEmail: result.user?.email
                 }
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
                         console.log("User created in database. ", res.data);
                         if (res.data.insertedId) {
                             toast.success('User created successfully!');
+                            axiosPublic.post('/biodata', userInfo)
+                                .then(res => {
+                                    console.log("User created in database. ", res.data);
+                                    if (res.data.insertedId) {
+                                        toast.success('Biodata created successfully!');
+                                    }
+                                    navigate(from, { replace: true });
+                                })
                         }
                         navigate(from, { replace: true });
                     })
@@ -52,19 +60,31 @@ const Register = () => {
                 updateUserProfile(data.Name, data.Photo)
                     .then(() => {
                         const userInfo = {
-                            name: data.Name,
-                            email: data.Email
+                            Name: data.Name,
+                            ContactEmail: data.Email
                         }
-                        axiosPublic.post('/users', userInfo)
+
+                        axiosPublic.post('/biodata', userInfo)
                             .then(res => {
-                                console.log("USer created in database. ", res.data);
+                                console.log("User created in database. ", res.data);
                                 if (res.data.insertedId) {
-                                    navigate(from, { replace: true });
-                                    toast.success('User created successfully!');
+                                    // navigate(from, { replace: true });
+                                    toast.success('Biodata created successfully!');
                                     console.log('loggedUser', loggedUser);
-                                    reset();
+                                    axiosPublic.post('/users', userInfo)
+                                        .then(res => {
+                                            console.log("User created in database. ", res.data);
+                                            if (res.data.insertedId) {
+                                                navigate(from, { replace: true });
+                                                toast.success('User created successfully!');
+                                                console.log('loggedUser', loggedUser);
+                                                reset();
+                                            }
+                                        })
                                 }
                             })
+
+
 
                     })
 
