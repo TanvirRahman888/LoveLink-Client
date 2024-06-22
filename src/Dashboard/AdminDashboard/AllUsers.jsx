@@ -1,7 +1,6 @@
 
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 const AllUsers = () => {

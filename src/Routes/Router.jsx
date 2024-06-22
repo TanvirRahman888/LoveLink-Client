@@ -16,6 +16,7 @@ import AllBiodata from "../Dashboard/AdminDashboard/AllBiodata";
 import AddBiodata from "../Dashboard/AdminDashboard/AddBiodata";
 import MaleBiodata from "../Dashboard/AdminDashboard/MaleBiodata";
 import FemaleBiodata from "../Dashboard/AdminDashboard/FemaleBiodata";
+import AdminDashboard from "../Dashboard/AdminDashboard/AdminDashboard";
 
 export const router = createBrowserRouter([
     {
@@ -66,6 +67,10 @@ export const router = createBrowserRouter([
                 element:<EditProfile></EditProfile>
             },
             // Admin Routes
+            {
+                path:'/dashboard/dashboard',
+                element:<AdminDashboard></AdminDashboard>
+            },
             {
                 path:'/dashboard/alluser',
                 element:<AllUsers></AllUsers>
