@@ -14,12 +14,13 @@ export default function StickyNavbar() {
     const [openNav, setOpenNav] = React.useState(false);
     const { user, logOut } = useContext(AuthContext);
     const [wishlist] = useWishList()
+    
 
     const handelLogOut = () => {
         logOut()
             .then(() => toast.success('Logout Successful'))
             .catch((error) => {
-                toast.error(error.message)
+                toast.error(error.message);
             });
     }
 

@@ -11,6 +11,11 @@ import Dashboard from "../Dashboard/Dashboard";
 import WishList from "../Dashboard/WishList";
 import MyProfile from "../Dashboard/MyProfile";
 import EditProfile from "../Dashboard/EditProfile";
+import AllUsers from "../Dashboard/AdminDashboard/AllUsers";
+import AllBiodata from "../Dashboard/AdminDashboard/AllBiodata";
+import AddBiodata from "../Dashboard/AdminDashboard/AddBiodata";
+import MaleBiodata from "../Dashboard/AdminDashboard/MaleBiodata";
+import FemaleBiodata from "../Dashboard/AdminDashboard/FemaleBiodata";
 
 export const router = createBrowserRouter([
     {
@@ -59,6 +64,27 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/editprofile',
                 element:<EditProfile></EditProfile>
+            },
+            // Admin Routes
+            {
+                path:'/dashboard/alluser',
+                element:<AllUsers></AllUsers>
+            },
+            {
+                path:'/dashboard/allbiodata',
+                element:<AllBiodata></AllBiodata>
+            },
+            {
+                path:'/dashboard/addbiodata',
+                element:<AddBiodata></AddBiodata>
+            },
+            {
+                path:'/dashboard/malebiodata',
+                element:<MaleBiodata></MaleBiodata>
+            },
+            {
+                path:'/dashboard/femalebiodata',
+                element:<FemaleBiodata></FemaleBiodata>
             },
         ]
     }
