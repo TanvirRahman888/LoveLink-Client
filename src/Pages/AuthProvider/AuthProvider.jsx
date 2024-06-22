@@ -12,6 +12,19 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const googleProvider = new GoogleAuthProvider();
+    const [Admin, setAdmin] = useState(false);
+
+    useEffect(() => {
+        fetch('https://love-link-server-eta.vercel.app/users')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                const loggedInUser = data.find(u => u.ContactEmail === user?.email);
+                if (loggedInUser && loggedInUser.Admin === "true") {
+                    setAdmin(true);
+                }
+            });
+    }, [user?.email]);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
@@ -56,6 +69,7 @@ const AuthProvider = ({ children }) => {
         user,
         auth,
         loading,
+        Admin,
         setLoading,
         createUser,
         logIn,

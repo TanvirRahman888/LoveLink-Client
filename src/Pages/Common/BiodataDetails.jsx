@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useWishList from "../../Hooks/useWishList";
 import MemberCard from "../Common/MemberCard";
+import { Helmet } from "react-helmet-async";
 
 const BiodataDetails = () => {
     const loadedBiodata = useLoaderData();
@@ -65,6 +66,9 @@ const BiodataDetails = () => {
 
     return (
         <div className="">
+            <Helmet>
+                <title>LoveLink | Biodata Details</title>
+            </Helmet>
             <p className="font-bold">Name : {Name} </p><br />
             <p className="font-bold">Occupation : {Occupation} </p><br />
             <p className="font-bold">Gender : {Gender} </p><br />

@@ -16,7 +16,7 @@ const SuccessStory = () => {
     const [feedback, setFeedback] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:5000/successstory")
+        fetch("https://love-link-server-eta.vercel.app/successstory")
             .then(res => res.json())
             .then(data => setFeedback(data));
     }, []);

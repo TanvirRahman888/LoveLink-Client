@@ -7,7 +7,7 @@ const PremiumMember = () => {
 
     const [premiumMember, setPremiumMember] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/biodata")
+        fetch("https://love-link-server-eta.vercel.app/biodata")
             .then(res => res.json())
             .then(data => setPremiumMember(data))
     }, [])

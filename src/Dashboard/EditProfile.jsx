@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../Pages/AuthProvider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
-import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const EditProfile = () => {
     const { user } = useContext(AuthContext);
@@ -41,6 +41,9 @@ const EditProfile = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>LoveLink | My Profile</title>
+            </Helmet>
             <h2 className="text-6xl">Edit Profile</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>

@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
 
 
 const Login = () => {
@@ -66,6 +67,9 @@ const Login = () => {
     return (
 
         <div className="flex items-center justify-center min-h-screen bg-[url('https://www.wedgatematrimony.com/wp-content/uploads/2020/02/matrimonial-site.jpg')] bg-cover" >
+            <Helmet>
+                <title>LoveLink | Log In</title>
+            </Helmet>
             <div className="p-4 w-2/3 md:w-1/2 bg-white bg-opacity-90 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
                 <form onSubmit={handelLogin} className="space-y-6">
                     <h5 className="text-2xl font-bold text-center text-gray-900 dark:text-white">Sign in to our platform</h5>

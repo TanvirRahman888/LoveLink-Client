@@ -17,11 +17,15 @@ import AddBiodata from "../Dashboard/AdminDashboard/AddBiodata";
 import MaleBiodata from "../Dashboard/AdminDashboard/MaleBiodata";
 import FemaleBiodata from "../Dashboard/AdminDashboard/FemaleBiodata";
 import AdminDashboard from "../Dashboard/AdminDashboard/AdminDashboard";
+import About from "../Pages/AboutUs/About";
+import Contact from "../Pages/Contact/Contact";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
     {
       path: "/",
       element: <Root/>,
+      errorElement:<ErrorPage></ErrorPage>,
       children:[
         {
             path:'/',
@@ -34,7 +38,7 @@ export const router = createBrowserRouter([
         {
             path:'/biodata/:id',
             element:<PrivateRoute><BiodataDetails></BiodataDetails></PrivateRoute>,
-            loader:({params})=>fetch(`http://localhost:5000/biodata/${params.id}`)
+            loader:({params})=>fetch(`https://love-link-server-eta.vercel.app/biodata/${params.id}`)
         },
         {
             path:'/login',
@@ -43,6 +47,14 @@ export const router = createBrowserRouter([
         {
             path:'/register',
             element:<Register></Register>
+        },
+        {
+            path:'/aboutus',
+            element:<About></About>
+        },
+        {
+            path:'/contactus',
+            element:<Contact></Contact>
         },
         {
             path:'/private',

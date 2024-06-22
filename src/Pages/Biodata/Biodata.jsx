@@ -3,6 +3,7 @@ import 'react-tabs/style/react-tabs.css';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import MemberCard from '../Common/MemberCard';
+import { Helmet } from 'react-helmet-async';
 
 const Biodata = () => {
   const { register, watch } = useForm();
@@ -31,7 +32,7 @@ const Biodata = () => {
 
   const fetchBioData = async (filters) => {
     const queryParams = new URLSearchParams(filters);
-    const response = await fetch(`http://localhost:5000/biodata?${queryParams}`);
+    const response = await fetch(`https://love-link-server-eta.vercel.app/biodata?${queryParams}`);
     const data = await response.json();
     setBioData(data);
   };
@@ -43,6 +44,9 @@ const Biodata = () => {
 
   return (
     <div className='flex flex-col md:flex-row md:gap-3 p-5 border rounded-xl'>
+      <Helmet>
+                <title>LoveLink | Biodata</title>
+            </Helmet>
       {/* Biodata page filter */}
       <div className='md:w-1/4 border rounded-xl'>
         <div>

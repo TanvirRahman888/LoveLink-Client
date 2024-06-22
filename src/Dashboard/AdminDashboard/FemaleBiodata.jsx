@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const FemaleBiodata = () => {
     const axiosSecure = useAxiosSecure();
@@ -44,9 +45,12 @@ const FemaleBiodata = () => {
     };
     return (
         <div className="mt-7 p-7 border-4 rounded-xl border-pink-300">
+            <Helmet>
+                <title>LoveLink | Female Biodata</title>
+            </Helmet>
             <div className="flex justify-evenly ">
-                <h2 className="text-2xl font-bold">All Users</h2>
-                <h2 className="text-2xl font-bold">Total Users : {biodata.length}</h2>
+                <h2 className="text-2xl font-bold">Female Biodata</h2>
+                <h2 className="text-2xl font-bold">Total Female Biodata : {biodata.length}</h2>
                 {console.log(biodata)}
             </div>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

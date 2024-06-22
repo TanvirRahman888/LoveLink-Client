@@ -2,6 +2,7 @@
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../Pages/AuthProvider/AuthProvider";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const MyProfile = () => {
     const { user } = useContext(AuthContext);
@@ -20,6 +21,9 @@ const MyProfile = () => {
     return (
         <div>
             <h2 className='text-6xl'>My Profile</h2>
+            <Helmet>
+                <title>LoveLink | My Profile</title>
+            </Helmet>
             {biodata && (
                 <div>
                     <p className="text-2xl">Name: <span className="font-bold ml-2">{biodata.Name}</span></p>

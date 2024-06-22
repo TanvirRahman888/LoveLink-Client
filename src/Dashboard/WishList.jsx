@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import useWishList from "../Hooks/useWishList";
 
 
@@ -6,6 +7,9 @@ const WishList = () => {
     console.log(wishListData);
     return (
         <div>
+            <Helmet>
+                <title>LoveLink | Wishlist</title>
+            </Helmet>
             <div className="flex justify-center my-5">
                 <h2 className="text-4xl font-bold mt-5">My Wish List</h2>
             </div>

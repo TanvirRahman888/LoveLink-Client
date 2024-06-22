@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
     const { googleSignIn } = useContext(AuthContext);
@@ -83,12 +84,7 @@ const Register = () => {
                                         })
                                 }
                             })
-
-
-
                     })
-
-
             })
             .catch(error => {
                 const errorCode = error.code;
@@ -103,6 +99,9 @@ const Register = () => {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-[url('https://i.ibb.co/0y2RJ5w/Computer-login-amico.png')] bg-cover" >
+            <Helmet>
+                <title>LoveLink | Register</title>
+            </Helmet>
             <div className="p-4 w-2/3 md:w-1/2 bg-white bg-opacity-90 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
                 <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                     <h5 className="text-xl font-medium text-center text-gray-900 dark:text-white">Sign Up in to our platform</h5>

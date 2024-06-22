@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AdminDashboard = () => {
     const axiosSecure = useAxiosSecure();
@@ -52,6 +53,9 @@ const AdminDashboard = () => {
     });
     return (
         <div className="p-5 m-5 border-4 border-pink-300 rounded-xl">
+            <Helmet>
+                <title>LoveLink | Admin Dashboard</title>
+            </Helmet>
             <h2 className="text-center font-bold text-4xl">Admin Dashboard</h2>
             <hr className="border-2 border-dotted border-pink-600 m-5"/>
             <div className="grid grid-cols-1 md:grid-cols-2 justify-evenly">
