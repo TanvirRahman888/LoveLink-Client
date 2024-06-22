@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const FemaleBiodata = () => {
     const axiosSecure = useAxiosSecure();
-    const { data: biodata = [] } = useQuery({
+    const { data: biodata = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/femalebiodata')
@@ -11,6 +12,36 @@ const FemaleBiodata = () => {
 
         }
     })
+    const handleDeleteBiodata = async (email) => {
+        const result = await Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        });
+
+        if (result.isConfirmed) {
+            const response = await axiosSecure.delete(`/allbiodata/${email}`);
+            if (response.data.success) {
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+                refetch();
+            } else {
+                Swal.fire({
+                    title: "Error!",
+                    text: "Your file was not deleted.",
+                    icon: "error"
+                });
+            }
+
+        }
+    };
     return (
         <div className="mt-7 p-7 border-4 rounded-xl border-pink-300">
             <div className="flex justify-evenly ">
@@ -68,7 +99,9 @@ const FemaleBiodata = () => {
                                     {bData.Age}
                                 </td>
                                 <td className="px-6 py-4 text-right">
-                                    <button className="btn btn-sm btn-error">Delete</button>
+                                    <button className="btn btn-sm btn-error"
+                                    onClick={() => handleDeleteBiodata(bData.ContactEmail)}
+                                    >Delete</button>
                                 </td>
                             </tr>)
                         }

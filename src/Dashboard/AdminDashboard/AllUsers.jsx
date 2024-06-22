@@ -1,17 +1,49 @@
 
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
-    const { data: users = [] } = useQuery({
+    const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/users')
+            const res = await axiosSecure.get('/users');
             return res.data;
+        }
+    });
+
+    const handleDeleteUser = async (email) => {
+        const result = await Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        });
+
+        if (result.isConfirmed) {
+            const response = await axiosSecure.delete(`/users/${email}`);
+            if (response.data.success) {
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+                refetch();
+            } else {
+                Swal.fire({
+                    title: "Error!",
+                    text: "Your file was not deleted.",
+                    icon: "error"
+                });
+            }
 
         }
-    })
+    };
     return (
         <div className="mt-7 p-7 border-4 rounded-xl border-pink-300">
             <div className="flex justify-evenly ">
@@ -41,9 +73,8 @@ const AllUsers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        
-                        {
-                            users.map((user, idx) => <tr key={idx + 1} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        {users.map((user, idx) => (
+                            <tr key={user.ContactEmail} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {idx + 1}
                                 </th>
@@ -57,11 +88,15 @@ const AllUsers = () => {
                                     <button className="btn btn-sm btn-success">Make Admin</button>
                                 </td>
                                 <td className="px-6 py-4 text-right">
-                                    <button className="btn btn-sm btn-error">Delete User</button>
+                                    <button
+                                        className="btn btn-sm btn-error"
+                                        onClick={() => handleDeleteUser(user.ContactEmail)}
+                                    >
+                                        Delete User
+                                    </button>
                                 </td>
-                            </tr>)
-                        }
-
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
