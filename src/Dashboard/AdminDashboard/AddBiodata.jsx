@@ -14,7 +14,7 @@ const AddBiodata = () => {
 
     const onSubmit = async (data) => {
         console.log(data);
-        data.Email = user.email; // Ensure the email is set to the logged-in user's email
+        data.Email = user.email; 
         const response = await axiosSecure.post('/biodata', data);
         console.log("Response data:", response.data);
 
@@ -27,8 +27,8 @@ const AddBiodata = () => {
                 timer: 1500
             });
 
-            reset(); // Reset the form after successful submission
-            navigate("/dashboard/myprofile");
+            reset(); 
+            navigate("/dashboard/allbiodata");
         } else {
             Swal.fire({
                 position: "center",
