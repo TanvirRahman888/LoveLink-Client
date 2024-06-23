@@ -46,7 +46,7 @@ const SuccessStory = () => {
     return (
         <div>
             <SectionTitle title={"Success Story"} sortDescription={"Happy Clients Feedback"}></SectionTitle>
-            {feedback.length}
+            {/* {feedback.length} */}
             {/* ---------- */}
             <Swiper
                 // install Swiper modules
