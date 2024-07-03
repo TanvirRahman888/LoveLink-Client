@@ -96,7 +96,7 @@ Before you begin, ensure you have met the following requirements:
       git clone https://github.com/TanvirRahman888/LoveLink-Client
 
 2. **Navigate to the project directory**
-      cd Travel-With-Tanvir-Client
+      cd LoveLink-Client
 3. **Install dependencies**
       npm install
 4. **Set up environment variables**
